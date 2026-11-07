@@ -1,71 +1,16 @@
-# Arquitetura proposta
+# Arquitetura implementada
 
-Documento de planejamento. Nenhum comando de build ou teste existe ainda neste repositório.
+React 19.2.6, TypeScript 5.9.3, Three.js 0.187.0 e Vite 8.3.6. Site estático independente, com caminhos relativos e lockfile fixado.
 
-## Base
+- `src/simulation/flow.ts`: intervalos dos lotes, histórico de destinos e integração por trechos. Uma matriz 3×3 soma o que cada tanque recebeu de cada origem; nenhuma troca apaga recebimentos anteriores. Grandezas em unidades ilustrativas.
+- `src/scene/pipeline.ts`: nove grupos semânticos, geometria autoral, texturas de padrões geradas localmente, válvulas e níveis determinados pelo mesmo balanço da UI.
+- `src/scene/runtime.ts`: órbita, seleção, enquadramento, corte, isolamento, desmontagem, malha e ciclo de vida WebGL.
+- `src/App.tsx`: controles HTML, histórico, balanço legível e tour; móvel usa diálogo para catálogo e detalhe abaixo do modelo.
+- `src/scene/capture.ts`: PNG 1920×1080 ou 1080×1920. Vertical usa câmera específica e legenda; restaura câmera/resolução ao terminar.
+- `src/content/project.ts`: explicações, limites e fontes.
 
-React + TypeScript + Three.js + Vite, como referência do Fusquinha. Fixar versões e lockfile no início da implementação, após verificar compatibilidade atual e licença do código reaproveitado. Não adotar a versão antiga do Three apenas por cópia automática.
+Base visual e infraestrutura derivadas do projeto autoral `caminhao-lixo`. Cada repositório instala e compila sozinho; não há dependência de diretórios vizinhos. O mecanismo e a cena são próprios do oleoduto. Nenhum código/asset do Fusquinha foi copiado.
 
-Aplicação estática executada no navegador do visitante. O MVP não requer LLM, backend nem GPU de produção permanentemente alocada. Modelagem e processamento de assets são tarefas separadas e delimitadas.
+Renderização sob demanda, 30 fps durante interação, DPR até 1,5, suspensão por visibilidade, descarte de recursos. Vista inicial: 156 draw calls, aproximadamente 35.066 triângulos incluindo sombras. JS de produção 805,26 KB / 216,43 KB gzip; aviso de chunk acima de 500 KB mantido visível.
 
-## Organização sugerida
-
-```text
-src/
-  app/              composição da tela e estados de carregamento
-  scene/            cena, câmera, iluminação e renderização
-  interactions/     seleção, isolamento, corte e desmontagem
-  simulation/       estado determinístico do mecanismo educativo
-  content/          catálogo, explicações, vídeos e fontes
-  ui/               controles HTML acessíveis
-  styles/           tokens do ovictorlab e layout
-public/
-  models/           somente arquivos com entrega web autorizada
-  audio/            sons licenciados, carregados sob demanda
-  fonts/            fontes locais e respectivas licenças
-```
-
-Criar só o que o piloto utilizar. Começar independente; extrair um pacote compartilhado depois que o segundo projeto comprovar reutilização concreta.
-
-## Contratos
-
-- Peça: `id`, `label`, `groupId`, nós do modelo, pose de origem, descrição e referências. IDs estáveis entre atualizações.
-- Seleção: um catálogo determina o que pode ser selecionado; elementos auxiliares não capturam clique por acidente.
-- Desmontagem: transformação deriva de pose de origem e progresso 0–1; nunca acumula deslocamento a cada frame. Corte e desmontagem são modos distintos.
-- Mecanismo: estado serializável, limites explícitos, pausa e reset. Tempo de animação não depende de quantidade de frames.
-- Fontes: título, instituição/autor, URL, data de consulta, afirmação suportada e limite. Texto da interface aponta para esse catálogo.
-- Áudio: inicia após gesto, tem volume/mute e para com cena oculta ou mecanismo desligado.
-
-## O que avaliar no Fusquinha
-
-`src/VehicleScene.tsx`: renderização/câmera/seleção. `src/catalog.ts`: agrupamento. `src/layout.ts`: posições e enquadramento. `src/vehicle-rig.ts`: pivôs e articulação. `src/vehicle-sounds.ts`: áudio. `src/engine-motion.ts`: movimento e pausa. Esses arquivos são referências de implementação, não garantem uma biblioteca pronta para outros objetos.
-
-Antes de copiar, conferir responsabilidades, licenças e dependências. Motor, material, cenário e GLB do Fusquinha não pertencem automaticamente ao novo projeto.
-
-## Orçamento inicial de desempenho
-
-Metas propostas a validar no primeiro protótipo, não resultados já medidos:
-
-- Cena em aproximadamente 30 fps durante interação no dispositivo móvel de referência registrado.
-- Renderização sob demanda quando parada; suspender trabalho em aba oculta.
-- Começar com DPR limitado a 1,5 no celular, texturas de 1K quando suficientes e cena progressiva. Ajustar por medição visual e de memória.
-- Buscar até 10 MB comprimidos para a primeira cena útil; qualquer exceção precisa de comparação antes/depois e carregamento progressivo.
-- Medir modelo, texturas, draw calls e tempo até o primeiro controle utilizável. Evitar simulação física genérica quando uma cinemática determinística explica o fenômeno.
-
-## Entrega futura
-
-Build estático com caminhos relativos ou base configurável; testar recarga direta e hospedagem em subpasta. Integração com ovictorlab.com pode usar rota ou link, a decidir quando houver aplicação pronta. Não alterar o site principal durante o desenvolvimento inicial.
-
-Captura PNG é uma possibilidade herdada do Fusquinha. Presets de câmera 16:9 e 9:16 e tour guiado são extensões planejadas; não estão implementados. Gravar vídeo exige validar o método de captura e sincronização do som.
-
-## Implementação específica
-
-Geometria: Geometria procedural de tubos, conexões, válvulas e reservatórios; lotes definidos por intervalos ao longo de uma curva. Começar sem dinâmica de fluidos.
-
-Estado proposto: `idle → batchA → interface → batchB → complete; reset zera volumes recebidos e reposiciona todos os lotes.`
-
-Invariantes que devem orientar código e testes:
-
-- Os volumes ilustrados não surgem ou desaparecem ao trocar de destino.
-- A interface é uma região identificada; não representar uma parede sólida entre líquidos.
-- Cores diferentes também têm nomes e padrões; seleção não depende da percepção de cor.
+Sem backend, dados pessoais, tráfego de telemetria, física CFD, som ou uso da GPU de produção. As cores/padrões e dimensões não são dados de um terminal real.

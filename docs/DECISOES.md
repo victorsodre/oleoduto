@@ -8,7 +8,7 @@
 - Repositório inicialmente privado por escolha operacional conservadora nesta fase. O pedido autoriza o envio dos guias; não foi tratado como solicitação de implementar e publicar os aplicativos.
 - Nenhuma postagem no X enviada. Textos de protótipo e lançamento têm condições explícitas de uso.
 
-## Pendências técnicas
+## Pendências iniciais — resolvidas na implementação
 
 - Documentação de operador de dutos sobre transporte em bateladas e destinação da interface.
 - Verificar os limites do exemplo escolhido e a relação entre fluxo, válvula e recebimento.
@@ -18,3 +18,11 @@ Próxima ação: Desenhar o diagrama do trecho e validar o tratamento da interfa
 ## Como registrar mudanças
 
 Acrescentar data, decisão, motivo, fonte/evidência, arquivos afetados e consequência para o escopo. Separar proposta, implementação, validação e publicação. Preservar decisões antigas com indicação de substituição quando necessário.
+
+## 2026-11-07 — aplicação implementada
+
+Victor definiu a meta de desenvolver os dez projetos. Implementação autorizada, com publicação web e posts ainda separados.
+
+Modelo procedural independente, baseado nos conceitos da Transpetro; seção de 100 unidades ilustrativas, com interface segregada no cenário automático. Histórico de válvula e matriz de recebimento garantem conservação de volume e evitam mover retroativamente o líquido. Faixas são indicadores de origem; não pretendem representar estratificação.
+
+Base visual e renderização reaproveitadas do projeto autoral do caminhão, sem pacote compartilhado prematuro. Cena e mecanismo próprios. Sem áudio por não acrescentar explicação a este escopo. Nove testes e 22 verificações no Chrome aprovados, build em subpasta conferido; limites em VALIDACAO.md. Nenhum deploy ou post enviado.

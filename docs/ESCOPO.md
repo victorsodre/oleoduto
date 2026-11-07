@@ -19,7 +19,7 @@ Esses grupos são uma proposta semântica; validar sua correspondência com a ge
 
 ## Ações principais
 
-| Controle | Comportamento planejado |
+| Controle | Comportamento implementado |
 |---|---|
 | Enviar lotes | Inicia a sequência de volumes identificados por cor e padrão. |
 | Avançar fluxo | Controla a posição ao longo do trecho, com pausa. |
@@ -47,3 +47,9 @@ Base de exploração: órbita, zoom, seleção por lista ou clique, isolamento, 
 - Pressões, velocidades ou volumes apresentados como dados de operação sem referência.
 
 Ampliações entram no backlog após o piloto, com evidência de uso e esforço. Não incluir funcionalidades só para repetir todas as opções do Fusquinha.
+
+## Modelo adotado
+
+Seção inicial preenchida com 100 unidades: gasolina 40, interface 20, diesel 40. O avanço move essa seção; a região neutra que a desloca representa continuidade do fluxo, fora do balanço acompanhado. Não existe intervalo de ar. Volumes e velocidade são ilustrativos.
+
+Troca automática segrega a interface. Troca manual registra destino e posição, preservando o passado. Voltar na linha do tempo reconstitui os volumes; mudar a válvula ali substitui somente o histórico futuro. As faixas de composição nos tanques são um gráfico 3D por origem, não estratificação física.

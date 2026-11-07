@@ -1,6 +1,6 @@
 # Assets e fontes — Oleoduto: combustíveis no mesmo tubo
 
-**Situação inicial:** nenhum modelo, som ou conjunto de dados novo incorporado. Abaixo estão referências e tarefas de apuração, não certificação técnica de um aplicativo pronto.
+**Estado atual:** modelo procedural e padrões autorais, com tipografia licenciada. Referência factual abaixo, sem dados operacionais reais.
 
 ## Conteúdo que originou a proposta
 
@@ -11,28 +11,23 @@ O Reel do tema registrou 37.151 visualizações, 137 salvamentos e 557 compartil
 
 Leitura em 07/11/2026. A análise consultou as APIs oficiais do Instagram/YouTube e relatórios existentes do canal. Vídeos do próprio canal orientam a pauta; fatos científicos/operacionais precisam retornar a fontes primárias antes de serem usados no modelo.
 
-## Apuração obrigatória antes de implementar
+## Fonte primária consultada em 07/11/2026
 
-- Documentação de operador de dutos sobre transporte em bateladas e destinação da interface.
-- Verificar os limites do exemplo escolhido e a relação entre fluxo, válvula e recebimento.
+[Transpetro — Condições Gerais de Serviço, Transporte Dutoviário: Dutos Longos, revisão 05, abril/2013](https://transpetro.com.br/lumis/portal/file/fileDownload.jsp?fileId=4028908687346A610187648F1A943E26).
 
-Para cada afirmação, registrar: texto, fonte primária, URL/página, data de consulta, trecho ou figura de suporte, unidades, limites e onde aparece na experiência. Não listar uma instituição como se um documento específico já tivesse sido conferido.
+- Item 3.11, página 5: interface é mistura resultante de produtos em sequência.
+- Item 8.1, página 10: o produto seguinte desloca o anterior; interfaces dependem da operação e sequência.
+- Item 8.2, páginas 10–11: possibilidades de compartilhamento, direcionamento e segregação. A experiência escolhe o caso segregado e deixa esse limite explícito.
 
-## Necessidade de geometria
+Consulta factual; não copiamos diagramas ou tabelas nem redistribuímos o PDF. A experiência não apresenta esses termos históricos como norma operacional vigente. Não usa volumes, pressões ou vazões reais.
 
-Geometria procedural de tubos, conexões, válvulas e reservatórios; lotes definidos por intervalos ao longo de uma curva. Começar sem dinâmica de fluidos.
+## Assets incorporados
 
-## Registro de aquisição
+| Asset | Origem e termos |
+|---|---|
+| Geometria do terminal, texturas e padrões | Código procedural autoral em `pipeline.ts`, sem modelo externo |
+| Marca | SVG oficial de ovictorlab.com, copiado da implementação autoral do caminhão |
+| Tipografia local | Fontsource 5.3.0: Anton, Archivo, Archivo Black, JetBrains Mono; SIL OFL, textos em `public/licenses/` |
+| Bibliotecas | React/Three/Vite/Lucide e ferramentas fixadas no lockfile, avisos em `public/licenses/bibliotecas.txt` |
 
-Preencher uma linha por asset ao incorporar. Manter a tabela vazia enquanto nada foi adquirido.
-
-| Arquivo/asset | Autor e URL | Licença/termos e data | Uso web permitido | Alterações | Hash/créditos |
-|---|---|---|---|---|---|
-
-Confirmar permissão para servir o arquivo no navegador: GLB e áudio enviados ao visitante são extraíveis. A licença do código não substitui a licença dos assets. Não baixar pacote executável, rodar scripts embutidos ou publicar interiores não verificados como engenharia fiel.
-
-## Referências da coleção
-
-- Marca e tipografia: fontes oficiais apontadas em IDENTIDADE-VISUAL.md.
-- Interação: [Fusquinha](https://github.com/victorsodre/fusquinha), especialmente README e documentação de assets.
-- Som: escolher fontes com licença explícita, início por gesto e mute. Evitar sons que sugiram mecanismo diferente do representado.
+Sem asset comprado, áudio externo, código ou modelo do Fusquinha. As faixas nos tanques explicam a composição por origem, não a separação física dos líquidos depois de recebidos.

@@ -12,10 +12,10 @@ Gasolina e diesel no mesmo tubo viraram um dos vídeos mais vistos do ovictorlab
 
 ## Bastidor
 
-Condição/mídia: Usar somente depois de existir o protótipo descrito. Anexar captura real da interação; ajustar o texto ao que efetivamente funcionar.
+Condição/mídia: Protótipo implementado e validado em 07/11/2026. Anexar captura real, por exemplo `output/playwright/desktop-troca-tardia.png`. Aplicativo ainda sem URL pública.
 
 ```text
-No protótipo do oleoduto, a parte mais importante é a interface entre os lotes. Dá para pausar o fluxo e acompanhar o destino de cada trecho. A animação precisa explicar o processo, além de ficar bonita.
+No oleoduto interativo, mudar a válvula tarde demais tem consequência: o que já entrou no tanque fica lá. Dá para pausar o fluxo, escolher o destino e conferir o balanço dos lotes. A interface entre gasolina e diesel ganhou uma experiência própria.
 ```
 
 ## Lançamento
