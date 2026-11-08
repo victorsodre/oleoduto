@@ -10,6 +10,16 @@ Um trecho de duto com dois lotes, uma região de interface e um terminal de rece
 
 Direção e autoria editorial: **Victor Sodré / ovictorlab**. [Site](https://ovictorlab.com/) · [Referência Fusquinha](https://victorsodre.github.io/fusquinha/) · [Repositório](https://github.com/victorsodre/oleoduto).
 
+## Entenda no vídeo
+
+<a href="https://www.youtube.com/watch?v=BM1JQSVafug"><img src="public/video-thumbnail.jpg" width="280" alt="Assistir: O truque químico para separar gasolina e diesel no duto 🧪 #ciencia #engenharia" /></a>
+
+**[O truque químico para separar gasolina e diesel no duto 🧪 #ciencia #engenharia](https://www.youtube.com/watch?v=BM1JQSVafug)**
+
+Veja como os combustíveis seguem pelo mesmo duto. Depois, volte ao experimento para acompanhar os lotes e escolher os destinos.
+
+O player incorporado fica [na página do experimento](https://victorsodre.github.io/oleoduto/#video), com carregamento por clique e sem reprodução automática.
+
 ## Por que desenvolver
 
 O Reel do tema registrou 37.151 visualizações, 137 salvamentos e 557 compartilhamentos no Instagram. Consulta em 07/11/2026. Métricas acumuladas são sinais de interesse; não comprovam demanda pelo aplicativo ou alcance orgânico.
