@@ -2,12 +2,12 @@
 
 Rascunhos para Victor publicar posteriormente. **Nada foi enviado.** Público: pessoas curiosas sobre engenharia/ciência e quem acompanha a construção dos projetos. Um assunto por post, sem métricas privadas ou promessa de data.
 
-## Planejamento
+## Apresentação do projeto
 
-Condição/mídia: Pode ser usado para anunciar a intenção. Mostrar esquema identificado como plano ou referência do Fusquinha.
+Condição/mídia: Versão local concluída. Anexar captura real; o texto não anuncia uma URL pública.
 
 ```text
-Gasolina e diesel no mesmo tubo viraram um dos vídeos mais vistos do ovictorlab. Quero transformar a explicação em um experimento: enviar os lotes, seguir o caminho e ver o que acontece na região entre eles.
+Gasolina e diesel no mesmo tubo agora têm um experimento no ovictorlab. Você envia os lotes, acompanha a região entre eles e muda o destino. O balanço mostra para onde cada volume foi. Versão educativa pronta localmente.
 ```
 
 ## Bastidor
