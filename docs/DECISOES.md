@@ -26,3 +26,7 @@ Victor definiu a meta de desenvolver os dez projetos. Implementação autorizada
 Modelo procedural independente, baseado nos conceitos da Transpetro; seção de 100 unidades ilustrativas, com interface segregada no cenário automático. Histórico de válvula e matriz de recebimento garantem conservação de volume e evitam mover retroativamente o líquido. Faixas são indicadores de origem; não pretendem representar estratificação.
 
 Base visual e renderização reaproveitadas do projeto autoral do caminhão, sem pacote compartilhado prematuro. Cena e mecanismo próprios. Sem áudio por não acrescentar explicação a este escopo. Nove testes e 22 verificações no Chrome aprovados, build em subpasta conferido; limites em VALIDACAO.md. Nenhum deploy ou post enviado.
+
+## 2026-11-08 — repositório público e GitHub Pages
+
+Victor autorizou aprimorar e tornar públicos os dez projetos com HTML funcional e identidade oficial. Esta decisão substitui a restrição histórica de publicação acima. Incluídos navegação entre os dez sites, canonical/OG/X, prévia real, sitemap, página 404, verificação de caminhos e workflow com testes/build antes do deploy. URL: https://victorsodre.github.io/oleoduto/. Conteúdo e modelo educativo preservados; nenhum post enviado ao X. Procedimento e reversão em PUBLICACAO.md.

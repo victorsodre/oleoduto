@@ -1,6 +1,8 @@
 # Oleoduto: combustíveis no mesmo tubo
 
-> **Estado: aplicação implementada e validada localmente em 07/11/2026.** Sem deploy público. Segunda entrega da coleção de dez projetos.
+**[Abrir a experiência →](https://victorsodre.github.io/oleoduto/)** · [Os 10 experimentos](docs/COLECAO.md) · [Publicação e manutenção](docs/PUBLICACAO.md)
+
+[![Oleoduto — captura real da experiência](public/share.png)](https://victorsodre.github.io/oleoduto/)
 
 **Como gasolina e diesel passam pelo mesmo tubo?**
 
@@ -22,7 +24,7 @@ O Reel do tema registrou 37.151 visualizações, 137 salvamentos e 557 compartil
 3. [Identidade visual do ovictorlab](docs/IDENTIDADE-VISUAL.md).
 4. [Arquitetura proposta e reaproveitamento do Fusquinha](docs/ARQUITETURA.md).
 5. [Assets, fontes e pendências de apuração](docs/ASSETS-E-FONTES.md).
-6. [Manutenção, validação e publicação futura](docs/MANUTENCAO.md).
+6. [Manutenção, validação e publicação](docs/MANUTENCAO.md).
 7. [Decisões e estado do projeto](docs/DECISOES.md).
 8. [Textos para o X](POSTAGENS-X.md) e [ordem da coleção](docs/COLECAO.md).
 

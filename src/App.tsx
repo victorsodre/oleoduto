@@ -1,3 +1,4 @@
+import { CollectionNav } from './ui/CollectionNav.tsx';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Box, ChevronRight, Download, Eye, Focus, Layers3, Maximize, Minus, Pause, Play, Plus, RotateCcw, Search, X } from 'lucide-react';
 import { Brand } from './ui/Brand.tsx';
@@ -77,7 +78,7 @@ export function App() {
   }
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
-      if (e.ctrlKey || e.metaKey || e.altKey || e.target instanceof HTMLInputElement || sources || drawer) return;
+      if (document.querySelector('dialog[open]') || e.ctrlKey || e.metaKey || e.altKey || e.target instanceof HTMLInputElement || sources || drawer) return;
       if (e.key.toLowerCase() === 'r') scene.current?.home();
       if (e.key.toLowerCase() === 'e') { setPlaying(false); setExplosion(p => p > 0 ? 0 : 1); }
       if (e.key === 'Escape') { setSelected(null); setIsolated(false); setTour(false); }
@@ -116,7 +117,7 @@ export function App() {
       </section>
     </main>
     <section className="balance" aria-label="Balanço dos lotes"><div className="balance-heading"><div><p className="eyebrow">ACOMPANHE A SEÇÃO DE 100 UNIDADES</p><h2>Para onde foi cada lote?</h2></div><p><strong>{format(flow.total)} recebidas</strong> · {format(flow.remaining)} no trecho<br/><span>Unidades ilustrativas. Sem perda ou criação de volume.</span></p></div><div className="balance-grid">{products.map((id,i)=><article className="tank-reading" key={id}><h3><span className={`product-mark product-${id}`}>{['A','I','B'][i]}</span>Tanque {productNames[id]}</h3><strong className="tank-total">{format(flow.received[i].reduce((sum,n)=>sum+n,0))}<small>un.</small></strong><div className="level-bar" aria-hidden="true">{products.map((p,j)=><span key={p} className={`product-${p}`} style={{width:`${flow.received[i][j]}%`}}/>)}</div><dl>{products.map((p,j)=><div key={p}><dt>{productNames[p]}</dt><dd>{format(flow.received[i][j])}</dd></div>)}</dl></article>)}</div><p className="balance-note" role="status">{flow.misplaced>.01?`${format(flow.misplaced)} unidades foram para um destino diferente do exemplo de segregação. Corrigir a válvula agora não desfaz o que já chegou.`:'No modo de segregação deste exemplo, cada região segue para seu tanque. Experimente escolher outro destino durante a interface.'}</p><p className="balance-disclosure">As faixas representam a origem dos volumes, não camadas físicas nos tanques. A faixa neutra no duto é a continuidade do fluxo que desloca a seção acompanhada.</p></section>
-    <footer><span>UM EXPERIMENTO DO OVICTORLAB <i>© 2026</i></span><button onClick={() => setSources(true)}>Modelo educativo · Fontes e créditos <ArrowUpRight size={13}/></button></footer>
+    <footer><span>UM EXPERIMENTO DO OVICTORLAB <i>© 2026</i></span><button onClick={() => setSources(true)}>Modelo educativo · Fontes e créditos <ArrowUpRight size={13}/></button><CollectionNav current="oleoduto"/></footer>
     <Sources open={sources} onClose={() => setSources(false)}/>
     <dialog ref={partsDialog} className="parts-dialog" onClose={() => setDrawer(false)} aria-label="Conjuntos do oleoduto"><div className="dialog-top"><span className="eyebrow">CONHEÇA OS CONJUNTOS</span><button className="icon-button" aria-label="Fechar conjuntos" onClick={() => setDrawer(false)}><X size={20}/></button></div>{renderParts()}</dialog>
     <span className="sr-only" role="status" aria-live="polite">{notice}</span>

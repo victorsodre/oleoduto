@@ -4,10 +4,10 @@ Rascunhos para Victor publicar posteriormente. **Nada foi enviado.** Público: p
 
 ## Apresentação do projeto
 
-Condição/mídia: Versão local concluída. Anexar captura real; o texto não anuncia uma URL pública.
+Condição/mídia: Anexar captura real da experiência. URL: https://victorsodre.github.io/oleoduto/
 
 ```text
-Gasolina e diesel no mesmo tubo agora têm um experimento no ovictorlab. Você envia os lotes, acompanha a região entre eles e muda o destino. O balanço mostra para onde cada volume foi. Versão educativa pronta localmente.
+Como gasolina e diesel passam pelo mesmo tubo? No oleoduto 3D do ovictorlab, você envia os lotes, acompanha a interface e escolhe o destino no terminal. A experiência educativa já está no ar.
 ```
 
 ## Bastidor
@@ -20,10 +20,10 @@ No oleoduto interativo, mudar a válvula tarde demais tem consequência: o que j
 
 ## Lançamento
 
-Condição/mídia: Usar somente depois de publicar e validar o aplicativo. Anexar demonstração real; responder com a URL pública exata. Não usar endereço privado de repositório como link para experimentar.
+Condição/mídia: Anexar demonstração real e abrir a URL pública para conferir antes de enviar.
 
 ```text
-O oleoduto interativo está no ar. Você envia os lotes, acompanha o fluxo e explora o que acontece entre um combustível e outro. Link na resposta.
+O oleoduto interativo está no ar. Você envia os lotes, acompanha o fluxo e explora o que acontece entre um combustível e outro. https://victorsodre.github.io/oleoduto/
 ```
 
 ## Antes de colar no X
@@ -31,5 +31,5 @@ O oleoduto interativo está no ar. Você envia os lotes, acompanha o fluxo e exp
 - Conferir se o tempo verbal corresponde ao estado real do projeto.
 - Validar duração, legibilidade e texto alternativo da mídia anexada.
 - Conferir o comprimento no compositor; os rascunhos não dependem de assinatura ou postagem longa.
-- Inserir link somente quando existir e puder ser aberto pelo público.
+- Abrir a URL pública acima antes de postar; conferir também em uma janela sem sessão.
 - Após publicar, registrar data e permalink aqui. Não automatizar envios a partir deste arquivo.
