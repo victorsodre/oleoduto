@@ -8,7 +8,7 @@ const sources = {
 };
 
 export const project = {
-  number: '02', title: 'UM TUBO. DOIS COMBUSTÍVEIS.',
+  title: 'UM TUBO. DOIS COMBUSTÍVEIS.',
   intro: 'Acompanhe os lotes, veja o densímetro decidir a troca e escolha para onde vai a mistura.',
   video: 'https://www.youtube.com/watch?v=BM1JQSVafug',
   stages: [
@@ -27,7 +27,7 @@ export const project = {
     { text: 'Não há parede: os lotes seguem em contato, um empurrando o outro.', source: 'Martinoia, 2016; Tepedino et al., 2007' },
     { text: 'O redemoinho ajuda. No escoamento turbulento, a fronteira se espalha menos do que num escoamento calmo, em que o centro do cano corre na frente.', source: 'Martinoia, 2016' },
     { text: 'Num poliduto brasileiro de 8 polegadas e 67 km, a mistura entre gasolina e diesel teve quase 400 m: menos de 1 % do duto. Aqui ela aparece ampliada.', source: 'Martinoia, 2016' },
-    { text: 'Na chegada, um densímetro acompanha a massa específica. A diferença entre diesel e gasolina é da ordem de 100 kg/m³; quando a leitura muda, as válvulas trocam o destino.', source: 'Martinoia, 2016; Tepedino et al., 2007' },
+    { text: 'Na chegada, um densímetro acompanha a massa específica. O diesel é mais denso: cada metro cúbico tem da ordem de 100 kg a mais que um de gasolina; quando a leitura muda, as válvulas trocam o destino.', source: 'Martinoia, 2016; Tepedino et al., 2007' },
     { text: 'Em 2001, a Portaria ANP 310 subiu o ponto de fulgor mínimo do diesel para 38 °C. No OSBRA, 9 de cada 10 litros dessas misturas passaram a voltar de caminhão para a refinaria.', source: 'UFU, 2009' },
     { text: 'A saída foi o QINTER, posto entre o diesel e a gasolina. As fontes vão de 2001 a 2010; o uso atual não foi confirmado.', source: 'UFU, 2009; SPOLM, 2010' },
   ],

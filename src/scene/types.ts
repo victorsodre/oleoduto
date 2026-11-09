@@ -10,6 +10,8 @@ export type Assembly = {
   update: (progress: number, cutaway: boolean, routes: RouteEvent[], seal: Seal) => void;
   /** Redraws the canvas labels once the web font is available. */
   refreshLabels: () => void;
+  /** Keeps the 3D labels at a fixed on-screen size for a viewport of `width` × `height` px. */
+  sizeLabels: (width: number, height: number, projectionY: number) => void;
   dispose: () => void;
 };
 export type ViewState = {

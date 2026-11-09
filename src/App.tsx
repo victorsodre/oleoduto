@@ -1,6 +1,9 @@
 import { video } from './content/video.ts';
 import { VideoSection } from './kit/VideoSection.tsx';
 import { CollectionNav } from './kit/CollectionNav.tsx';
+import { labNumber } from './kit/collection.ts';
+
+const LAB_NUMBER = labNumber('oleoduto');
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, Box, ChevronRight, Download, Eye, Focus, Layers3, Maximize, Minus, Pause, Play, Plus, RotateCcw, Search, X } from 'lucide-react';
 import { Brand } from './kit/Brand.tsx';
@@ -109,9 +112,9 @@ export function App() {
     </div>
   </>;
   return <div className="app">
-    <header className="header"><Brand/><div className="collection-label">ENGENHARIA POR DENTRO <span>/</span> LAB {project.number}</div><a className="video-link" href="#video">Assistir ao vídeo <ArrowUpRight size={16}/></a></header>
+    <header className="header"><Brand/><div className="collection-label">ENGENHARIA POR DENTRO <span>/</span> LAB {LAB_NUMBER}</div><a className="video-link" href="#video">Ver o vídeo <ArrowUpRight size={16}/></a></header>
     <main className="workspace" ref={workspace}>
-      <div className="heading"><p className="eyebrow"><span/> EXPERIMENTO {project.number} <i>—</i> TRANSPORTE EM BATELADAS</p><h1>{project.title}</h1><p className="intro">{project.intro}</p></div>
+      <div className="heading"><p className="eyebrow"><span/> EXPERIMENTO {LAB_NUMBER} <i>—</i> TRANSPORTE EM BATELADAS</p><h1>{project.title}</h1><p className="intro">{project.intro}</p></div>
       <div className="canvas-region"><div className="scene-host" ref={host}/>
         {!parts.length && !error && <div className="loading" role="status">Preparando o laboratório…</div>}
         {error && <div className="scene-error" role="alert"><Box size={32}/><h2>Cena indisponível</h2><p>{error}</p><button className="primary" onClick={() => location.reload()}>Tentar novamente</button><a href={project.video}>Assistir ao vídeo</a></div>}

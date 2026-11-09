@@ -70,9 +70,9 @@ export function createScene(host: HTMLElement, onSelect: (id: string | null) => 
     const { width, height } = host.getBoundingClientRect(); if (width < 1 || height < 1) return;
     renderer.setSize(width, height);
     const aspect = width / height;
-    if (!sized) { sized = true; camera.aspect = aspect; home(defaultDirection); return; }
+    if (!sized) { sized = true; camera.aspect = aspect; home(defaultDirection); model.sizeLabels(width, height, camera.projectionMatrix.elements[5]); return; }
     camera.position.copy(keepOrbit(camera.position, controls.target, framedPoints(), camera.aspect, aspect, camera.fov));
-    camera.aspect = aspect; camera.updateProjectionMatrix(); controls.update(); invalidate();
+    camera.aspect = aspect; camera.updateProjectionMatrix(); model.sizeLabels(width, height, camera.projectionMatrix.elements[5]); controls.update(); invalidate();
   }
   const observer = new ResizeObserver(size); observer.observe(host);
   const change = () => invalidate(); controls.addEventListener('change', change);

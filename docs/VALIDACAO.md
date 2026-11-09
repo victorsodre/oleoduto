@@ -45,3 +45,7 @@ O mesmo fluxo passou nas dez URLs públicas do GitHub Pages em 08/11/2026: playe
 ## Revisão — 09/11/2026
 
 `npm test` (16 testes: fluxo, densímetro, corte automático, cena, materiais, selo, enquadramento, órbita no resize e toque), `npm run build` e `npm run check:pages` aprovados. Chromium headless (Playwright, fora do Chrome do Victor) em 1440×1000, 1200×900 e 390×844: seleção mantida após toque no vazio e após arrasto, órbita mantida no resize, QINTER até o fim com tanques 50/0/50 e destinos desativados, nenhum texto abaixo de 11 px nem alvo abaixo de 44 px no celular fora do lab-kit, sem rolagem horizontal e sem erros JavaScript. Sem telefone físico.
+
+## Segunda rodada — 09/11/2026
+
+Etiquetas 3D viraram sprites com altura fixa na tela (24 px, texto de cerca de 13 px) e redesenho ao trocar de tamanho; abaixo de 600 px de largura do canvas os tanques mostram só a letra (A, I, B), como nos controles, e a etiqueta do densímetro cresce para a esquerda para não cobrir as dos tanques. Número do cabeçalho e do resumo pré-renderizado vem de `labNumber('oleoduto')` do lab-kit (05); link do topo "Ver o vídeo"; dica de mouse só com `pointer: fine` e de toque só com `pointer: coarse`; textos próprios do lab em 11 px ou mais; painel de detalhe no desktop não cobre mais a introdução. `npm test`, `npm run build` e `npm run check:pages` aprovados; Chromium headless em 1440×900, 1000×800 e 390×844 sem texto cortado ou sobreposto e sem erros JavaScript. Sem telefone físico.

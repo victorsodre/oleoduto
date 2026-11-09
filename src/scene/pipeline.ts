@@ -18,21 +18,39 @@ function fluidMaterial(from: string, to: string, pattern: Pattern) {
   const map = new T.DataTexture(data, n, n); map.needsUpdate = true; map.wrapS = map.wrapT = T.RepeatWrapping;
   return new T.MeshStandardMaterial({ map, roughness: .38, metalness: .15 });
 }
-type Label = { canvas: HTMLCanvasElement; texture: T.CanvasTexture; text: string };
-function drawLabel({ canvas, texture, text }: Label) {
+/** On-screen height of a 3D label in CSS pixels; its text is a bit over half of it (about 13 px). */
+const LABEL_PX = 24, LABEL_CANVAS_H = 128, LABEL_FONT = '600 68px Archivo, sans-serif';
+type Label = { canvas: HTMLCanvasElement; texture: T.CanvasTexture; sprite: T.Sprite; text: string; short?: string; compact?: boolean };
+function drawLabel({ canvas, texture, text: full, short, compact }: Label) {
+  const text = compact && short ? short : full;
   const ctx = canvas.getContext('2d'); if (!ctx) return;
-  ctx.clearRect(0, 0, 512, 96); ctx.fillStyle = '#101526'; ctx.fillRect(0, 0, 512, 96); ctx.strokeStyle = '#5c657d'; ctx.strokeRect(1, 1, 510, 94);
-  ctx.font = '600 30px Archivo, sans-serif'; ctx.fillStyle = '#f1f2f8'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, 256, 48);
+  ctx.font = LABEL_FONT;
+  const width = Math.ceil(ctx.measureText(text).width) + 72;
+  if (canvas.width !== width) { canvas.width = width; canvas.height = LABEL_CANVAS_H; texture.dispose(); }
+  ctx.clearRect(0, 0, width, LABEL_CANVAS_H); ctx.fillStyle = '#101526'; ctx.fillRect(0, 0, width, LABEL_CANVAS_H);
+  ctx.lineWidth = 3; ctx.strokeStyle = '#5c657d'; ctx.strokeRect(1.5, 1.5, width - 3, LABEL_CANVAS_H - 3);
+  ctx.font = LABEL_FONT; ctx.fillStyle = '#f1f2f8'; ctx.textAlign = 'center'; ctx.textBaseline = 'middle'; ctx.fillText(text, width / 2, LABEL_CANVAS_H / 2 + 3);
   texture.needsUpdate = true;
 }
 export function createPipeline(): Assembly {
   const root = new T.Group(), parts: Part[] = [], m = materials(), labels: Label[] = [];
-  const tag = (parent: T.Group, text: string, x: number, y: number, z: number) => {
+  // Labels are sprites with a fixed size on screen, so they stay legible on phones and never grow huge when zoomed in.
+  const tag = (parent: T.Group, text: string, x: number, y: number, z: number, short?: string, anchorX = .5) => {
     if (typeof document === 'undefined') return;
-    const canvas = document.createElement('canvas'); canvas.width = 512; canvas.height = 96;
-    const label: Label = { canvas, texture: new T.CanvasTexture(canvas), text }; drawLabel(label); labels.push(label);
-    const plane = mesh(parent, new T.PlaneGeometry(1.8, .34), new T.MeshBasicMaterial({ map: label.texture, side: T.DoubleSide }), x, y, z);
-    plane.rotation.x = -.2; plane.castShadow = false;
+    const canvas = document.createElement('canvas'), texture = new T.CanvasTexture(canvas);
+    texture.colorSpace = T.SRGBColorSpace; texture.anisotropy = 4;
+    const sprite = new T.Sprite(new T.SpriteMaterial({ map: texture, sizeAttenuation: false, depthTest: false, toneMapped: false }));
+    sprite.center.set(anchorX, 0); sprite.position.set(x, y, z); sprite.renderOrder = 10; parent.add(sprite);
+    const label: Label = { canvas, texture, sprite, text, short }; drawLabel(label); labels.push(label);
+  };
+  /** Keeps every label LABEL_PX tall on a viewport `height` px tall, given projectionMatrix.elements[5]. */
+  let labelHeight = .1;
+  const applyLabelSize = () => { for (const { sprite, canvas } of labels) sprite.scale.set(labelHeight * canvas.width / canvas.height, labelHeight, 1); };
+  /** On narrow viewports the three tanks sit close together on screen, so their labels keep only the letter. */
+  const sizeLabels = (width: number, height: number, projectionY: number) => {
+    const compact = width < 600;
+    for (const label of labels) if (label.short && label.compact !== compact) { label.compact = compact; drawLabel(label); }
+    labelHeight = LABEL_PX * 2 / (projectionY * height); applyLabelSize();
   };
   const part = (id: string, label: string, detail: string, note: string, offset: [number, number, number]) => {
     const group = new T.Group(); group.name = id; group.userData.partId = id; root.add(group); parts.push({ id, label, detail, note, group, offset: new T.Vector3(...offset) }); return group;
@@ -44,7 +62,7 @@ export function createPipeline(): Assembly {
     part('interface', 'I · Interface ou selo', 'Região entre os lotes. Em contato direto, é gasolina misturada com diesel (degradê com trama). Com selo, é o QINTER (laranja com faixas).', 'Não existe uma parede sólida entre os líquidos. Aqui a região está ampliada: num poliduto brasileiro de 67 km, a mistura teve quase 400 m.', [0, 1.3, 0]),
     part('diesel', 'B · Diesel', 'Segundo lote: faixa azul com pontos.', '40 unidades ilustrativas da seção acompanhada.', [0, .6, -.3]),
   ];
-  const sensorGroup = part('sensor', 'Densímetro na chegada', 'Mede a massa específica do que chega. O diesel é mais denso que a gasolina, com diferença da ordem de 100 kg/m³; quando a leitura muda, a válvula troca de tanque.', 'A luz vai do amarelo ao azul conforme a leitura. O ponto de corte no meio da mistura é ilustrativo.', [0, .9, 0]);
+  const sensorGroup = part('sensor', 'Densímetro na chegada', 'Mede a massa específica do que chega. O diesel é mais denso: cada metro cúbico tem da ordem de 100 kg a mais que um de gasolina; quando a leitura muda, a válvula troca de tanque.', 'A luz vai do amarelo ao azul conforme a leitura. O ponto de corte no meio da mistura é ilustrativo.', [0, .9, 0]);
   const valves = part('valves', 'Válvulas e destinos', 'A seleção abre uma rota para o tanque correspondente.', 'Mudar a rota afeta o que chegar depois. O líquido já recebido não muda de tanque.', [.7, .5, 0]);
   const tankGroups = products.map((id, i) => part(`tank-${id}`, ['Tanque A · Gasolina', 'Tanque I · Mistura', 'Tanque B · Diesel'][i],
     ['Recebe a gasolina e, no corte automático, a primeira metade da região do meio.', 'Tanque separado para a mistura, uma das destinações possíveis. Só recebe se você escolher.', 'Recebe o diesel e, no corte automático, a segunda metade da região do meio.'][i],
@@ -75,7 +93,8 @@ export function createPipeline(): Assembly {
   const probe = rod(sensorGroup, .05, m.silver); connect(probe, new T.Vector3(sensorX, y + .2, 0), new T.Vector3(sensorX, y + .58, 0));
   const sensorMat = new T.MeshStandardMaterial({ color: palette.gasoline, emissive: palette.gasoline, emissiveIntensity: .9 });
   const sensorLight = mesh(sensorGroup, new T.SphereGeometry(.09, 16, 10), sensorMat, sensorX, y + .92, 0); sensorLight.castShadow = false;
-  tag(sensorGroup, 'DENSÍMETRO', sensorX, y + 1.28, .1);
+  // Anchored by its right end so it grows away from the tank labels.
+  tag(sensorGroup, 'DENSÍMETRO', sensorX, y + 1.28, .1, undefined, .85);
   const centers = [2.5, 0, -2.5];
   const handles: T.Mesh[] = [], routeLights: T.Mesh[] = [], levels: T.Mesh[][] = [];
   const shellMat = new T.MeshStandardMaterial({ color: '#c2cfdd', roughness: .3, metalness: .25, transparent: true, opacity: .18, depthWrite: false, side: T.DoubleSide });
@@ -87,7 +106,7 @@ export function createPipeline(): Assembly {
     for (const h of [.25, 2.46]) mesh(g, new T.TorusGeometry(.85, .045, 8, 48), m.silver, x, h, z).rotation.x = Math.PI / 2;
     tankRoofs.push(mesh(g, new T.ConeGeometry(.88, .23, 48), m.ivory, x, 2.58, z));
     mesh(g, new T.CylinderGeometry(.12, .12, .2, 16), m.steel, x, 2.8, z);
-    tag(g, ['A  ·  GASOLINA', 'I  ·  MISTURA', 'B  ·  DIESEL'][i], x, 2.98, z + .15);
+    tag(g, ['A  ·  GASOLINA', 'I  ·  MISTURA', 'B  ·  DIESEL'][i], x, 2.98, z + .15, ['A', 'I', 'B'][i]);
     levels.push(products.map((_, j) => mesh(g, new T.CylinderGeometry(.8, .8, 1, 36), fluidMats[j], x, .25, z)));
     const inletRod = rod(valves, .15, m.steel); connect(inletRod, new T.Vector3(end, y, 0), new T.Vector3(2.35, y, z));
     const outletRod = rod(valves, .15, m.steel); connect(outletRod, new T.Vector3(2.35, y, z), new T.Vector3(3.4, y, z));
@@ -128,8 +147,9 @@ export function createPipeline(): Assembly {
   update(0, true, [{ at: 0, destination: 'auto' }], 'direct');
   return {
     root, parts, update,
-    refreshLabels: () => labels.forEach(drawLabel),
+    refreshLabels: () => { labels.forEach(drawLabel); applyLabelSize(); },
+    sizeLabels,
     // The middle material not in use is outside the tree; disposing twice is harmless in three.js.
-    dispose: () => { disposeTree(root); for (const mat of [mixMat, qinterMat]) { mat.map?.dispose(); mat.dispose(); } },
+    dispose: () => { disposeTree(root); for (const { sprite, texture } of labels) { texture.dispose(); sprite.material.dispose(); } for (const mat of [mixMat, qinterMat]) { mat.map?.dispose(); mat.dispose(); } },
   };
 }
