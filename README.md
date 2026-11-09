@@ -2,7 +2,7 @@
 
 **[Abrir a experiência →](https://victorsodre.github.io/oleoduto/)** · [Os 10 experimentos](docs/COLECAO.md) · [Publicação e manutenção](docs/PUBLICACAO.md)
 
-[![Oleoduto — captura real da experiência](public/share.png)](https://victorsodre.github.io/oleoduto/)
+[![Oleoduto — captura real da experiência](public/share.jpg)](https://victorsodre.github.io/oleoduto/)
 
 **Como gasolina e diesel passam pelo mesmo tubo?**
 
