@@ -376,6 +376,8 @@ dialog::backdrop{background:#050713c9;backdrop-filter:blur(7px)}
   .trick-copy h2{font-size:28px}
   .seal-options button{min-height:72px;padding:12px}
   .trick-chart{padding:14px 12px 8px}
+  /* SVG text scales with the 320-unit viewBox: 12.5 units stay above 11 px at 360 px wide. */
+  .density-chart{font-size:12.5px;overflow:visible}
   .trick-facts{grid-template-columns:1fr}
 }
 
