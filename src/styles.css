@@ -290,6 +290,8 @@ dialog::backdrop{background:#050713c9;backdrop-filter:blur(7px)}
   .control-dock{width:min(800px,calc(100% - 350px))}
   .camera-tools{transform:translateY(-70%)}
   .sidebar{top:258px}
+  /* When the selected part sits on the left half, the detail panel moves next to the camera tools so it does not hide that part. */
+  .inspector.right{left:auto;right:96px}
 }
 
 @media(max-width:760px){

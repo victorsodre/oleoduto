@@ -45,4 +45,5 @@ Pedido de Victor ("faça tudo") a partir da revisão dos dez labs.
 - Cor: a região misturada usa o degradê gasolina→diesel com trama em todo lugar (3D, balanço, PNG); laranja passa a ser o QINTER.
 - Celular e câmera: texto ≥ 11 px e alvos ≥ 44 px no celular (exceto o vídeo e a navegação, que vêm do lab-kit), descrição da etapa visível, barra de câmera em linha abaixo da cena, canvas com `touch-action: pan-y`, enquadramento pelas caixas de cada peça, órbita preservada em resize/tela cheia/isolamento, toque distinguido de arrasto.
 - Etiquetas 3D (09/11/2026): sprites de tamanho fixo na tela, com letra só nos tanques em telas estreitas.
+- Painel "Em detalhe" no desktop (09/11/2026): fica à esquerda do canvas; quando a peça escolhida está na metade esquerda da tela (ex.: Entrada), passa para junto da barra de câmera, para não cobrir a peça.
 - Bugs: meia-cana com material próprio (não altera aço e marfim compartilhados), etiquetas 3D redesenhadas quando a Archivo carrega, destinos desativados com o envio concluído, sombra 1024 no celular, código morto removido de `geometry.ts`.

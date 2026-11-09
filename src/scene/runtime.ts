@@ -127,6 +127,11 @@ export function createScene(host: HTMLElement, onSelect: (id: string | null) => 
       const p = model.parts.find(p => p.id === id); if (!p) return;
       controls.target.copy(fit(camera, framePoints(p.group), orbitDirection(camera, controls.target))); controls.update(); invalidate();
     },
+    screenX(id) {
+      const p = model.parts.find(p => p.id === id); if (!p) return null;
+      const center = new T.Box3().setFromObject(p.group).getCenter(new T.Vector3()).project(camera);
+      return (center.x + 1) / 2;
+    },
     zoom(factor) { camera.position.sub(controls.target).multiplyScalar(factor).add(controls.target); controls.update(); invalidate(); },
     preset(view) { home(view === 'side' ? new T.Vector3(.01, .15, 1) : view === 'rear' ? new T.Vector3(1, .2, .01) : defaultDirection); },
     capture(portrait = false) {

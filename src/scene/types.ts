@@ -21,6 +21,8 @@ export type ViewState = {
 export type SceneHandle = {
   update: (state: ViewState) => void;
   home: () => void; focus: (id: string) => void;
+  /** Horizontal center of a part on the canvas, from 0 (left) to 1 (right). */
+  screenX: (id: string) => number | null;
   zoom: (factor: number) => void; capture: (portrait?: boolean) => void;
   preset: (view: 'perspective' | 'side' | 'rear') => void;
   dispose: () => void;
