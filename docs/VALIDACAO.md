@@ -41,3 +41,7 @@ Fluxo a conferir após cada publicação: abrir pelo cabeçalho, capa legível, 
 Nesta rodada, os dez players foram carregados no Chrome em estado pronto (`5` / cued), com o ID esperado e sem reprodução automática. Navegação pelo cabeçalho, clique/Enter, dimensões mínimas, thumbnail local e link direto aprovados; nenhuma requisição ao YouTube antes do clique ou erro JavaScript nos fluxos.
 
 O mesmo fluxo passou nas dez URLs públicas do GitHub Pages em 08/11/2026: player pronto com ID correto, sem autoplay, sem chamadas ao YouTube antes do clique, teclado e dimensões responsivas aprovados, sem erros JavaScript. A verificação confirmou carregamento do player; não assistiu integralmente aos vídeos.
+
+## Revisão — 09/11/2026
+
+`npm test` (16 testes: fluxo, densímetro, corte automático, cena, materiais, selo, enquadramento, órbita no resize e toque), `npm run build` e `npm run check:pages` aprovados. Chromium headless (Playwright, fora do Chrome do Victor) em 1440×1000, 1200×900 e 390×844: seleção mantida após toque no vazio e após arrasto, órbita mantida no resize, QINTER até o fim com tanques 50/0/50 e destinos desativados, nenhum texto abaixo de 11 px nem alvo abaixo de 44 px no celular fora do lab-kit, sem rolagem horizontal e sem erros JavaScript. Sem telefone físico.

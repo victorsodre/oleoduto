@@ -1,7 +1,9 @@
 import * as T from 'three';
-import { fit } from './camera.ts';
+import { fit, framePoints } from './camera.ts';
+import { palette } from './palette.ts';
+import type { Seal } from '../simulation/flow.ts';
 
-export function saveSceneImage(renderer: T.WebGLRenderer, scene: T.Scene, camera: T.PerspectiveCamera, object: T.Object3D, portrait = false) {
+export function saveSceneImage(renderer: T.WebGLRenderer, scene: T.Scene, camera: T.PerspectiveCamera, object: T.Object3D, seal: Seal, portrait = false) {
   const width = portrait ? 1080 : 1920, height = portrait ? 1920 : 1080;
   const heading = portrait ? 310 : 150, footer = 100, sceneHeight = height - heading - footer;
   const size = renderer.getSize(new T.Vector2()), ratio = renderer.getPixelRatio(), aspect = camera.aspect;
@@ -11,7 +13,7 @@ export function saveSceneImage(renderer: T.WebGLRenderer, scene: T.Scene, camera
   const ctx = output.getContext('2d'); if (!ctx) throw new Error('Não foi possível preparar a imagem.');
   try {
     renderer.setPixelRatio(1); renderer.setSize(width, sceneHeight, false);
-    camera.aspect = width / sceneHeight; fit(camera, new T.Box3().setFromObject(object), direction);
+    camera.aspect = width / sceneHeight; fit(camera, framePoints(object), direction);
     renderer.render(scene, camera);
     ctx.fillStyle = '#0b0d1a'; ctx.fillRect(0, 0, width, height);
     const gradient = ctx.createRadialGradient(width * .5, height * .45, 20, width * .5, height * .45, width * .7);
@@ -22,8 +24,9 @@ export function saveSceneImage(renderer: T.WebGLRenderer, scene: T.Scene, camera
     ctx.fillStyle = '#f1f2f8'; ctx.font = '34px "Archivo Black", sans-serif'; ctx.fillText('ovictorlab', 108, 72);
     ctx.font = `${portrait ? 56 : 44}px Anton, sans-serif`; ctx.fillText('COMBUSTÍVEIS NO MESMO TUBO', 50, portrait ? 174 : 130);
     if (portrait) {
-      const labels = ['A · Gasolina', 'I · Interface', 'B · Diesel'];
-      ['#ffd21f', '#ef7d42', '#52b8da'].forEach((color, i) => {
+      const labels = ['A · Gasolina', seal === 'qinter' ? 'I · QINTER' : 'I · Mistura', 'B · Diesel'];
+      const mix = ctx.createLinearGradient(0, 220, 0, 246); mix.addColorStop(0, palette.gasoline); mix.addColorStop(1, palette.diesel);
+      [palette.gasoline, seal === 'qinter' ? palette.qinter : mix, palette.diesel].forEach((color, i) => {
         const x = 50 + i * 330; ctx.fillStyle = color; ctx.fillRect(x, 220, 8, 26);
         ctx.font = '26px Archivo, sans-serif'; ctx.fillStyle = '#d5daea'; ctx.fillText(labels[i], x + 24, 244);
       });

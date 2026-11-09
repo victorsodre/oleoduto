@@ -52,4 +52,4 @@ Ampliações entram no backlog após o piloto, com evidência de uso e esforço.
 
 Seção inicial preenchida com 100 unidades: gasolina 40, interface 20, diesel 40. O avanço move essa seção; a região neutra que a desloca representa continuidade do fluxo, fora do balanço acompanhado. Não existe intervalo de ar. Volumes e velocidade são ilustrativos.
 
-Troca automática segrega a interface. Troca manual registra destino e posição, preservando o passado. Voltar na linha do tempo reconstitui os volumes; mudar a válvula ali substitui somente o histórico futuro. As faixas de composição nos tanques são um gráfico 3D por origem, não estratificação física.
+Troca automática pelo densímetro: a válvula muda de A para B no meio da mistura (corte ilustrativo), e cada metade vai para o tanque do produto vizinho, como no OSBRA (substitui a segregação da interface em 09/11/2026; ver DECISOES.md). Troca manual registra destino e posição, preservando o passado. Voltar na linha do tempo reconstitui os volumes; mudar a válvula ali substitui somente o histórico futuro. As faixas de composição nos tanques são um gráfico 3D por origem, não estratificação física.

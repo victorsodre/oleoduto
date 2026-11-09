@@ -36,8 +36,11 @@ Usar a combinação de qualidade, uso e custo de manutenção para ajustar o pr�
 
 ## Regressões específicas
 
-- Automático ao fim: tanques 40/20/40; total 100.
-- Automático até 50%, então gasolina até o fim: 90/10/0, sendo 50 fora do destino do exemplo.
+- Automático ao fim: tanques 50/0/50 (a mistura dividida no corte); total 100.
+- Automático até 50%, então gasolina até o fim: 100/0/0, sendo 50 fora do corte automático.
+- Selo de QINTER: mesmo balanço; o densímetro não recebe curva inventada para o selo.
+- Girar, redimensionar, tela cheia, isolar e desmontar mantêm a direção da órbita; só Reenquadrar e Reiniciar voltam à vista padrão.
+- Toque parado e curto seleciona; arrasto, pinça, rolagem e toque no vazio não mudam a seleção nem pausam.
 - Trocar válvula sem avançar não modifica nenhum volume recebido.
 - Voltar e reencaminhar altera apenas o futuro; reset apaga o histórico e zera os tanques.
 - Validar cores, nomes e padrões sem depender apenas de cor; nunca representar uma divisória física na interface.

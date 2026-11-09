@@ -1,6 +1,5 @@
 import * as T from 'three';
 import { RoundedBoxGeometry } from 'three/addons/geometries/RoundedBoxGeometry.js';
-import { mergeGeometries } from 'three/addons/utils/BufferGeometryUtils.js';
 
 export const materials = () => ({
   yellow: new T.MeshStandardMaterial({ color: '#f4bf24', roughness: .36, metalness: .18 }),
@@ -8,11 +7,6 @@ export const materials = () => ({
   steel: new T.MeshStandardMaterial({ color: '#526273', roughness: .38, metalness: .65 }),
   silver: new T.MeshStandardMaterial({ color: '#b0bdc5', roughness: .27, metalness: .8 }),
   dark: new T.MeshStandardMaterial({ color: '#18212c', roughness: .62, metalness: .38 }),
-  rubber: new T.MeshStandardMaterial({ color: '#11151b', roughness: .9 }),
-  glass: new T.MeshStandardMaterial({ color: '#183040', roughness: .18, metalness: .55 }),
-  orange: new T.MeshStandardMaterial({ color: '#ef7d42', roughness: .4, metalness: .18 }),
-  light: new T.MeshStandardMaterial({ color: '#eff7e2', roughness: .18, emissive: '#c4d1b1', emissiveIntensity: .4 }),
-  red: new T.MeshStandardMaterial({ color: '#a8322e', roughness: .28 }),
 });
 
 export function mesh(parent: T.Object3D, geometry: T.BufferGeometry, material: T.Material, x = 0, y = 0, z = 0) {
@@ -48,26 +42,5 @@ export function disposeTree(root: T.Object3D) {
   for (const m of mats) {
     for (const v of Object.values(m)) if (v instanceof T.Texture) v.dispose();
     m.dispose();
-  }
-}
-
-/** Batch only static siblings. Moving meshes and independently hidden panels stay separate. */
-export function mergeStatic(group: T.Group) {
-  const batches = new Map<T.Material, T.Mesh[]>();
-  for (const child of group.children) if (child instanceof T.Mesh && !Array.isArray(child.material)) {
-    const items = batches.get(child.material) ?? []; items.push(child); batches.set(child.material, items);
-  }
-  for (const [material, items] of batches) {
-    if (items.length < 2) continue;
-    const geometries = items.map(item => {
-      item.updateMatrix();
-      const geometry = item.geometry.index ? item.geometry.toNonIndexed() : item.geometry.clone();
-      return geometry.applyMatrix4(item.matrix);
-    });
-    const merged = mergeGeometries(geometries, false);
-    if (!merged) throw new Error('Não foi possível combinar a geometria estática.');
-    for (const item of items) { group.remove(item); item.geometry.dispose(); }
-    for (const geometry of geometries) geometry.dispose();
-    mesh(group, merged, material);
   }
 }

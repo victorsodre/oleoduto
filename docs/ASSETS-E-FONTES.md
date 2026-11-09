@@ -17,7 +17,16 @@ Leitura em 07/11/2026. A análise consultou as APIs oficiais do Instagram/YouTub
 
 - Item 3.11, página 5: interface é mistura resultante de produtos em sequência.
 - Item 8.1, página 10: o produto seguinte desloca o anterior; interfaces dependem da operação e sequência.
-- Item 8.2, páginas 10–11: possibilidades de compartilhamento, direcionamento e segregação. A experiência escolhe o caso segregado e deixa esse limite explícito.
+- Item 8.2, páginas 10–11: possibilidades de compartilhamento, direcionamento e segregação. Desde 09/11/2026 o automático dilui a mistura nos tanques de produto, como no OSBRA; a segregação fica como escolha manual.
+
+## Fontes do truque do vídeo (pesquisa do EP284, consultada em 17/10/2026)
+
+- Martinoia, PUC-Rio, 2016: bateladas sem separação física; turbulência reduz a dispersão; ~400 m de mistura em poliduto de 8" e 67 km (duto não identificado); corte pela massa específica.
+- Tepedino et al., Rio Pipeline 2007: diferença da ordem de 100 kg/m³ entre diesel e gasolina; destinos possíveis da mistura.
+- Kotchetkoff Neto, UFU, 2009: OSBRA, Portaria ANP 310/2001, 90 % das interfaces de volta de caminhão, QINTER.
+- Sousa e Ferreira Filho, SPOLM, 2010: selo entre os produtos, misturável aos dois sem tirá-los de especificação.
+
+Limites: uso atual do QINTER não confirmado; curva do densímetro e ponto de corte são ilustrativos.
 
 Consulta factual; não copiamos diagramas ou tabelas nem redistribuímos o PDF. A experiência não apresenta esses termos históricos como norma operacional vigente. Não usa volumes, pressões ou vazões reais.
 

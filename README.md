@@ -6,7 +6,7 @@
 
 **Como gasolina e diesel passam pelo mesmo tubo?**
 
-Um trecho de duto com dois lotes, uma região de interface e um terminal de recebimento. A visualização explica o processo sem se apresentar como simulador operacional.
+Um trecho de duto com dois lotes, uma região de interface (ou um selo de QINTER), um densímetro na chegada e um terminal de recebimento. A visualização explica o processo sem se apresentar como simulador operacional.
 
 Direção e autoria editorial: **Victor Sodré / ovictorlab**. [Site](https://ovictorlab.com/) · [Referência Fusquinha](https://victorsodre.github.io/fusquinha/) · [Repositório](https://github.com/victorsodre/oleoduto).
 
@@ -55,14 +55,14 @@ npm run preview
 
 ## Recursos entregues
 
-Terminal 3D autoral com nove conjuntos: entrada/bomba, duto, gasolina, interface, diesel, válvulas e três tanques. Fluxo determinístico, avanço manual, pausa, reset e escolha de destino com histórico. O balanço conserva as 100 unidades ilustrativas e mostra a origem dos volumes em cada tanque.
+Terminal 3D autoral com dez conjuntos: entrada/bomba, duto, gasolina, interface ou selo, diesel, densímetro, válvulas e três tanques. Fluxo determinístico, avanço manual, pausa, reset e escolha de destino com histórico. No automático, o densímetro troca a válvula no meio da mistura e cada metade vai para o tanque do produto vizinho, como no OSBRA. A seção "O truque do vídeo" alterna contato direto e selo de QINTER, com a curva do densímetro e seis fatos com fonte. O balanço conserva as 100 unidades ilustrativas e mostra a origem dos volumes em cada tanque.
 
 Órbita, zoom, corte, busca, seleção por lista/clique, isolamento, desmontagem, malha, visita guiada e PNG 16:9/9:16 com a marca ovictorlab. Sem áudio neste tema.
 
-Referência: Transpetro, CGS Dutos Longos, rev. 05, itens 3.11/8.1/8.2. Este exemplo escolhe segregar a interface; não representa toda operação, vazões ou dimensões reais.
+Referências: Transpetro (CGS Dutos Longos, rev. 05), Martinoia (PUC-Rio, 2016), Tepedino et al. (2007), Kotchetkoff Neto (UFU, 2009) e SPOLM (2010), as mesmas da pesquisa do EP284. A região do meio está ampliada e o ponto de corte é ilustrativo; não representa vazões ou dimensões reais.
 
 ## Evidência
 
-[Validação e limites](docs/VALIDACAO.md): nove testes aprovados, check/build aprovados, 22 verificações de fluxo no Chrome, composição visual em desktop e viewport móvel, exportações e build estático em subpasta. Sem ensaio em telefone físico.
+[Validação e limites](docs/VALIDACAO.md): testes aprovados (16 na revisão de 09/11/2026), check/build aprovados, 22 verificações de fluxo no Chrome, composição visual em desktop e viewport móvel, exportações e build estático em subpasta. Sem ensaio em telefone físico.
 
 [Manutenção](docs/MANUTENCAO.md), [fontes e licenças](docs/ASSETS-E-FONTES.md), [decisões](docs/DECISOES.md). Os rascunhos do X permanecem sem envio.

@@ -1,23 +1,37 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { sampleFlow, setRoute, advancePlayback, type RouteEvent } from './flow.ts';
+import { sampleFlow, setRoute, advancePlayback, sensorReading, autoDestination, type RouteEvent } from './flow.ts';
 const auto: RouteEvent[] = [{ at: 0, destination: 'auto' }];
-const close = (a: number, b: number) => assert.ok(Math.abs(a - b) < 1e-8, `${a} != ${b}`);
-test('automatic receiving separates 40/20/40 with a complete material balance', () => {
+const close = (a: number | null, b: number) => assert.ok(a !== null && Math.abs(a - b) < 1e-8, `${a} != ${b}`);
+test('automatic cut splits the mixed region between the product tanks, as in OSBRA', () => {
   const s = sampleFlow(1, auto);
-  s.received.flat().forEach((v,i)=>close(v,[40,0,0,0,20,0,0,0,40][i]));
-  close(s.correct,100); close(s.remaining,0); close(s.total,100);
+  s.received.flat().forEach((v,i)=>close(v,[40,10,0,0,0,0,0,10,40][i]));
+  close(s.offCut,0); close(s.remaining,0); close(s.total,100);
+  assert.equal(autoDestination(.49),'gasoline'); assert.equal(autoDestination(.5),'diesel');
+});
+test('the arrival sensor rises from gasoline to diesel and the QINTER seal is not given a density', () => {
+  close(sensorReading(0,'direct'),0); close(sensorReading(.39,'direct'),0);
+  close(sensorReading(.5,'direct'),.5); close(sensorReading(.6,'direct'),1); close(sensorReading(1,'qinter'),1);
+  assert.equal(sensorReading(.5,'qinter'),null); close(sensorReading(.2,'qinter'),0);
+  let previous = 0;
+  for(let i=0;i<=100;i++){ const r=sensorReading(i/100,'direct')!; assert.ok(r>=previous-1e-12 && r<=1); previous=r; }
+  close(sensorReading(NaN,'direct'),0);
 });
 test('switching a destination changes future flow without moving received liquid', () => {
-  const history = setRoute(auto,.45,'gasoline');
+  const history = setRoute(auto,.45,'interface');
   assert.deepEqual(sampleFlow(.45,history).received, sampleFlow(.45,auto).received);
   const s = sampleFlow(.55,history);
-  close(s.received[0][1],10); close(s.received[1][1],5); close(s.total,55);
+  close(s.received[0][1],5); close(s.received[1][1],10); close(s.total,55); close(s.offCut,10);
 });
 test('late switch and later correction keep the mixing already received', () => {
   const h = setRoute(setRoute([{at:0,destination:'gasoline'}],.5,'interface'),.7,'diesel');
   assert.deepEqual(sampleFlow(1,h).received.map(r=>r.map(x=>Math.round(x))), [[40,10,0],[0,10,10],[0,0,30]]);
-  close(sampleFlow(1,h).correct,80);
+  close(sampleFlow(1,h).offCut,20);
+});
+test('switching to gasoline at the cut point sends everything after it to tank A', () => {
+  const s = sampleFlow(1, setRoute(auto,.5,'gasoline'));
+  assert.deepEqual(s.received.map(r=>r.reduce((a,b)=>a+b,0)).map(Math.round),[100,0,0]);
+  close(s.offCut,50);
 });
 test('scrubbing and rerouting rewrites only the future', () => {
   const h = setRoute(setRoute(auto,.7,'gasoline'),.3,'diesel');

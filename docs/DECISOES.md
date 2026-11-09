@@ -34,3 +34,14 @@ Victor autorizou aprimorar e tornar públicos os dez projetos com HTML funcional
 ## 2026-11-08 — vídeo do canal incorporado
 
 Pedido de Victor: embed abaixo do experimento e thumbnail clicável no README. Vídeo `BM1JQSVafug`, autoria ovictorlab confirmada pelo oEmbed público. Veja como os combustíveis seguem pelo mesmo duto. Depois, volte ao experimento para acompanhar os lotes e escolher os destinos. Player `youtube-nocookie.com`, criado só por clique, `autoplay=0`, controles nativos, referrer de origem e link direto sempre disponível. Capa local para não carregar o YouTube na abertura; layout portrait. Cabeçalho leva à seção `#video`. Identidade preservada; nenhum upload ou alteração de vídeo no canal.
+
+## 2026-11-09 — revisão: metadados, truque do vídeo e celular
+
+Pedido de Victor ("faça tudo") a partir da revisão dos dez labs.
+
+- Metadados: description, OG, Twitter e noscript vinham do caminhão de lixo; reescritos para o oleoduto, noscript aponta para `BM1JQSVafug`. Título com a busca ("Como gasolina e diesel viajam no mesmo cano?"), resumo indexável dentro de `#root` e JSON-LD `VideoObject`. `check-pages.mjs` passou a conferir JSON-LD, resumo e termos do título.
+- Automático: substitui a segregação em tanque de interface. Motivo: contradizia o vídeo e a pesquisa do EP284 (no OSBRA, a mistura era diluída nos tanques de produto, UFU 2009). Agora o densímetro troca a válvula no meio da mistura (corte ilustrativo). O tanque I virou "Mistura", destinação possível segundo Tepedino et al. (2007), só por escolha manual.
+- Truque do vídeo: densímetro 3D e na interface, seletor contato direto/selo de QINTER, curva ilustrativa e seis fatos com fonte (Martinoia 2016, Tepedino 2007, UFU 2009, SPOLM 2010). QINTER contado como história de 2001 a 2010; uso atual não confirmado. A densidade do QINTER não é desenhada por falta de fonte. Seletor laminar/turbulento ficou de fora: virou texto com fonte.
+- Cor: a região misturada usa o degradê gasolina→diesel com trama em todo lugar (3D, balanço, PNG); laranja passa a ser o QINTER.
+- Celular e câmera: texto ≥ 11 px e alvos ≥ 44 px no celular (exceto o vídeo e a navegação, que vêm do lab-kit), descrição da etapa visível, barra de câmera em linha abaixo da cena, canvas com `touch-action: pan-y`, enquadramento pelas caixas de cada peça, órbita preservada em resize/tela cheia/isolamento, toque distinguido de arrasto.
+- Bugs: meia-cana com material próprio (não altera aço e marfim compartilhados), etiquetas 3D redesenhadas quando a Archivo carrega, destinos desativados com o envio concluído, sombra 1024 no celular, código morto removido de `geometry.ts`.
